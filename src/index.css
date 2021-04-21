@@ -1,0 +1,20 @@
+@import 'modern-normalize/modern-normalize.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600&display=swap');
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* body {
+  background-image: url(./Images/Zoom_Background_002.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
