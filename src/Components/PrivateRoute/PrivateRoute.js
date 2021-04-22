@@ -1,21 +1,19 @@
-import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import authSelectors from '../redux/auth/auth-selectors';
-import { getToken } from '../../redux/auth/auth-selectors';
 
-/**
- * - Если маршрут ограниченный, и пользователь залогинен, рендерит редирект на /contacts
- * - В противном случае рендерит компонент
- */
-export default function PublicRoute({ redirectTo, children, ...routeProps }) {
-  const token = useSelector(getToken);
+import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
+
+const PrivateRoute = ({ component: Component, redirectTo, ...routeProps }) => {
+  const isAuthorized = useSelector(getIsAuthenticated);
 
   return (
-    <Route {...routeProps}>
-      {token && routeProps.restricted ? <Redirect to={redirectTo} /> : children}
-    </Route>
+    <Route
+      {...routeProps}
+      render={props =>
+        isAuthorized ? <Component {...props} /> : <Redirect to={redirectTo} />
+      }
+    />
   );
-}
+};
 
-// import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
+export default PrivateRoute;

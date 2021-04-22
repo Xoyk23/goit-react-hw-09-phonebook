@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import routes from './routes';
 import { getCurrentUser } from './redux/auth/auth-operations';
 
-import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './Components/PrivateRoute';
 import PublicRoute from './Components/PublicRoute';
 import AppBar from './Components/AppBar';
 import Container from './Components/Container';
