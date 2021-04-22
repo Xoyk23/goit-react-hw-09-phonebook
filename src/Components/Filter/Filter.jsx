@@ -1,7 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
 
 import { getFilter } from '../../redux/contactsItems/contacts-selectors';
 
@@ -9,7 +8,11 @@ import { changeFilter } from '../../redux/filter/filter-actions';
 
 import styles from './Filter.module.css';
 
-const Filter = ({ value, onChange }) => {
+export default function Filter() {
+  const dispatch = useDispatch();
+  const value = useSelector(getFilter);
+  const onChange = e => dispatch(changeFilter(e.target.value));
+
   return (
     <div className={styles.container}>
       <label className={styles.label}>
@@ -23,19 +26,9 @@ const Filter = ({ value, onChange }) => {
       </label>
     </div>
   );
-};
+}
 
 Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
-
-const mapStateToProps = state => ({
-  value: getFilter(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(changeFilter(e.target.value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);

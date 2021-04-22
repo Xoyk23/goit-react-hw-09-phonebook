@@ -1,20 +1,8 @@
-/* container: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  avatar: {
-    marginRight: 4,
-  },
-  name: {
-    fontWeight: 700,
-    marginRight: 12,
-  },
-}; */
-
 .container {
   margin-left: 550px;
   display: flex;
   align-items: center;
+  position: absolute;
 }
 
 .button {

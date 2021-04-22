@@ -1,28 +1,21 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
+import { useSelector } from 'react-redux';
+// import authSelectors from '../redux/auth/auth-selectors';
+import { getToken } from '../../redux/auth/auth-selectors';
 
 /**
- * - Если маршрут приватный и пользователь залогинен, рендерит компонент
- * - В противном случае рендерит Redirect на /login
+ * - Если маршрут ограниченный, и пользователь залогинен, рендерит редирект на /contacts
+ * - В противном случае рендерит компонент
  */
-const PrivateRoute = ({
-  component: Component,
-  isAuthenticated,
-  redirectTo,
-  ...routeProps
-}) => (
-  <Route
-    {...routeProps}
-    render={props =>
-      isAuthenticated ? <Component {...props} /> : <Redirect to={redirectTo} />
-    }
-  />
-);
+export default function PublicRoute({ redirectTo, children, ...routeProps }) {
+  const token = useSelector(getToken);
 
-const mapStateToProps = state => ({
-  isAuthenticated: getIsAuthenticated(state),
-});
+  return (
+    <Route {...routeProps}>
+      {token && routeProps.restricted ? <Redirect to={redirectTo} /> : children}
+    </Route>
+  );
+}
 
-export default connect(mapStateToProps)(PrivateRoute);
+// import { getIsAuthenticated } from '../../redux/auth/auth-selectors';

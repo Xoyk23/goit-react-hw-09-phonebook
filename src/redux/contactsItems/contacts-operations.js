@@ -23,7 +23,12 @@ const fetchContacts = () => async dispatch => {
     .catch(error => dispatch(fetchContactError(error)));
 };
 
-const addContact = contact => async dispatch => {
+const addContact = (name, number) => async dispatch => {
+  const contact = {
+    name,
+    number,
+  };
+
   dispatch(addContactRequest());
 
   axios
